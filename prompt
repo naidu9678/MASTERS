@@ -1,0 +1,84 @@
+You are operating in AGENT MODE with FULL FILE SYSTEM ACCESS.
+
+Your task is to perform a SAFE, COMPLETE migration of `id_operation` from INT to BIGINT across this repository.
+
+STRICT INSTRUCTIONS:
+
+1. FILE PROCESSING
+- Recursively scan all folders for `.sql` files
+- Process files in SMALL BATCHES (max 30 files at a time)
+- After each batch, pause and summarize changes
+
+2. DIRECT FILE MODIFICATION (MANDATORY)
+- You MUST edit files IN-PLACE
+- Do NOT just show diffs or suggestions
+- Save updated files back to disk
+
+3. WHAT TO CHANGE
+For every SQL file:
+- Convert `id_operation` from INT → BIGINT in:
+  a) Table definitions
+  b) Stored procedure parameters
+  c) Local variables (DECLARE)
+  d) Temp tables (#tables)
+  e) Table variables
+  f) Dynamic SQL strings
+
+4. LOGIC SAFETY
+- DO NOT change business logic
+- Preserve formatting and comments
+- Ensure joins, comparisons, and inserts remain valid
+
+5. TYPE SAFETY FIXES (CRITICAL)
+- Fix implicit conversions (INT ↔ BIGINT)
+- Add explicit CAST/CONVERT where required
+- Ensure consistency between procedure params and table columns
+
+6. DEPENDENCY AWARENESS
+- If a procedure references a table where `id_operation` is still INT:
+  → Flag it and DO NOT partially modify
+- Maintain cross-procedure compatibility
+
+7. RISK CONTROL
+- If any case is ambiguous:
+  → DO NOT modify
+  → Add comment: -- TODO: MANUAL REVIEW REQUIRED
+
+8. OUTPUT AFTER EACH BATCH
+Provide:
+- List of files modified
+- Summary of changes
+- Any risky or skipped files
+
+9. VALIDATION STEP
+After modifications:
+- Re-scan modified files
+- Ensure NO remaining `id_operation INT` exists
+
+10. PERFORMANCE SAFETY
+- Avoid unnecessary casting in WHERE/JOIN clauses
+- Do not degrade index usage
+
+IMPORTANT:
+This is a mission-critical financial system.
+Incorrect changes are worse than incomplete changes.
+
+Execution Plan:
+- Start with first batch of files
+- Modify safely
+- Report
+- Wait for next instruction
+
+
+Scan the entire repository and verify:
+
+1. No remaining occurrences of:
+   - id_operation INT
+2. All procedure parameters match table definitions
+3. No implicit INT/BIGINT mismatches
+4. No broken joins or casts
+
+Generate a final migration report:
+- Total files changed
+- Issues found
+- Manual review items
